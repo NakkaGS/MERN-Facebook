@@ -1,5 +1,5 @@
 const express = require("express")
-const { home } = require("../controllers/user")
+const { register } = require("../controllers/user")
 
 const router = express.Router()
 
@@ -7,7 +7,7 @@ const router = express.Router()
 //     res.send('Welcome from Backend')
 // })
 
-router.get("/user", home)
+router.post("/register", register)
 
 module.exports = router
 
