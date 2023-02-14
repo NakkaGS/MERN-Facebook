@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
 // reads the javacript file
 const { readdirSync } = require('fs')
 
-
 // .env
 const dotenv = require('dotenv')
 dotenv.config()
@@ -21,6 +20,7 @@ app.use(cors())
 readdirSync("./routes").map((r) => app.use('/', require("./routes/"+ r)))
 
 //database
+mongoose.set("strictQuery", false);
 mongoose.connect(process.env.MONGODBURL)
 .then(() => console.log("Database Connected Sucessfully"))
 .catch((err) => console.log("Error Connecting to MongoDB", err))
