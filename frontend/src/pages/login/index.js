@@ -63,8 +63,7 @@ function Login() {
               
             </div>
             <Link to='/' className="sign_extra">
-              <b>Create a Page</b>
-              for a celebrity, brand or business
+              <b>Create a Page</b> for a celebrity, brand or business
             </Link>
           </div>
 
