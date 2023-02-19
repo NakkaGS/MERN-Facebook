@@ -3,6 +3,7 @@ import React from 'react'
 
 import LoginForm from '../../components/login/LoginForm'
 import Footer from '../../components/login/Footer'
+import RegisterForm from '../../components/login/RegisterForm'
 
 function Login() {
   return (
@@ -11,10 +12,10 @@ function Login() {
 
         <LoginForm/>
 
-        <div className="register"></div>
+        <RegisterForm/>
 
         <Footer/>
-        
+
       </div>
     </div>
   )
