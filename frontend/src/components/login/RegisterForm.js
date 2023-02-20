@@ -4,6 +4,9 @@ import React, { useState } from 'react'
 
 import RegisterInput from '../input/registerInput'
 
+//Validation
+import * as Yup from "yup"
+
 function RegisterForm() {
 
   const userInfos = {
@@ -41,6 +44,26 @@ function RegisterForm() {
 
  const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
 
+ const registerValidation=Yup.object({
+  first_name: Yup.string().required("What's your first name")
+  .min(2, 'First name must be betweeen 2 and 16 characters.')
+  .max(16, 'First name must be betweeen 2 and 16 characters.')
+  .matches(/^[aA-zA\s]+$/, 'Numbers and special characters are not allowed'),
+
+  last_name: Yup.string().required("What's your last name")
+  .min(2, 'First name must be betweeen 2 and 16 characters.')
+  .max(16, 'First name must be betweeen 2 and 16 characters.')
+  .matches(/^[aA-zA\s]+$/, 'Numbers and special characters are not allowed'),
+
+  email:Yup.string().required("You'll need this when you log in and if you ever need to reset your password")
+  .email("Enter a valid email address"),
+
+  password: Yup.string().required("Enter a combination of at least six numbers, letters and ponctuation marks (such as ! and &)")
+  .min(6, 'Password must be betweeen 2 and 16 characters.')
+  .max(36, "Password can't be more than 16 characters.")
+
+ })
+
   const handleRegisterChange = (e) => {
     const {name, value} = e.target;
     setUser({ ...user, [name]:value })
@@ -55,7 +78,19 @@ function RegisterForm() {
           <span>It's quick axnd easy</span>
         </div>
 
-        <Formik>
+        <Formik
+        enableReinitialize
+        initialValues={{
+          first_name, 
+          last_name,
+          email,
+          password,
+          bYear,
+          bMonth,
+          bDay,
+          gender, 
+        }}
+        validationSchema={registerValidation}>
           <Form className='register_form'>
             <div className="reg_line">
               <RegisterInput type="text" placeholder="First name" name='first_name' onChange={handleRegisterChange}/>
