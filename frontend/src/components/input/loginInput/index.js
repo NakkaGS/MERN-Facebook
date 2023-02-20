@@ -10,8 +10,6 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
     query: "(min-width: 850px)"
   })
 
-  console.log(desktopView);
-
   return (
     <div className="input_wrap">
 
