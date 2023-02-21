@@ -7,6 +7,10 @@ import RegisterInput from '../input/registerInput'
 //Validation
 import * as Yup from "yup"
 
+//Components
+import DateOfBirthSelect from './DateOfBirthSelect';
+import GenderSelect from './GenderSelect';
+
 function RegisterForm() {
 
   const userInfos = {
@@ -69,6 +73,11 @@ function RegisterForm() {
     setUser({ ...user, [name]:value })
   }
 
+  const [dateError, setDateError] = useState("")
+  const [genderError, setGenderError] = useState("")
+
+  
+
   return (
     <div className="blur">
       <div className="register">
@@ -80,6 +89,7 @@ function RegisterForm() {
 
         <Formik
         enableReinitialize
+
         initialValues={{
           first_name, 
           last_name,
@@ -90,7 +100,30 @@ function RegisterForm() {
           bDay,
           gender, 
         }}
-        validationSchema={registerValidation}>
+
+        validationSchema={registerValidation}
+
+        onSubmit={() => {
+          let current_date = new Date();
+          let picked_date = new Date(bYear, bMonth - 1, bDay); //in java script month starts in 0 (january)
+          let atLeast14 = new Date(1970 + 14, 0, 1)
+          let noMoreThan70 = new Date(1970 + 70, 0, 1)
+
+          if (current_date - picked_date < atLeast14){
+            console.log(gender)
+            setDateError("It looks like you have entered the wrong info. Please make sure that you use your real date of birth.")
+          } else if (current_date- picked_date > noMoreThan70) {
+            setDateError("It looks like you have entered the wrong info. Please make sure that you use your real date of birth.")
+          } else if (gender === ""){ 
+            setGenderError("Please choose a gender. You can change who can see this later")
+          } else {
+            console.log(gender)
+            setDateError("")
+            setGenderError("")
+          }
+
+        }}>
+
           <Form className='register_form'>
 
             <div className="reg_line">
@@ -112,30 +145,17 @@ function RegisterForm() {
                 Date of birth <i className="info_icon"></i>
               </div>
 
-              <div className="reg_grid">
-                <select name="bDay" value={bDay} onChange={handleRegisterChange}>
-                {days.map ((day,i) => (
-                    <option value={day} key={i}>
-                      {day}
-                    </option>
-                  ))}
-                </select>
+              <DateOfBirthSelect
+                  bDay={bDay}
+                  bMonth={bMonth}
+                  bYear={bYear}
+                  days={days}
+                  months={months}
+                  years={years}
+                  handleRegisterChange={handleRegisterChange}
+                  dateError={dateError}
+                />
 
-                <select name="bMonth" value={bMonth} onChange={handleRegisterChange}>
-                {months.map ((month,i) => (
-                    <option value={month} key={i}>
-                      {month}
-                    </option>
-                  ))}
-                </select>
-                <select name="bYear" value={bYear} onChange={handleRegisterChange}>
-                  {years.map ((year,i) => (
-                    <option value={year} key={i}>
-                      {year}
-                    </option>
-                  ))}
-                </select>
-              </div>
             </div>
 
             <div className="reg_col">
@@ -143,22 +163,11 @@ function RegisterForm() {
                 Gender <i className="info_icon"></i>
               </div>
 
-              <div className="reg_grid">
-                <label htmlFor="male">
-                  Male
-                  <input type="radio" name='gender' id='male' value='male' onChange={handleRegisterChange}/>
-                </label>
+              <GenderSelect
+                  handleRegisterChange={handleRegisterChange}
+                  genderError={genderError}
+                />
 
-                <label htmlFor="female">
-                  Female
-                  <input type="radio" name='gender' id='female' value='female' onChange={handleRegisterChange}/>
-                </label>
-
-                <label htmlFor="custom">
-                  Custom
-                  <input type="radio" name='gender' id='custom' value='custom' onChange={handleRegisterChange}/>
-                </label>
-              </div>
             </div>
 
             <div className="reg_infos">
