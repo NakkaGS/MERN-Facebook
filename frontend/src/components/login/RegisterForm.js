@@ -31,38 +31,38 @@ function RegisterForm() {
     bMonth,
     bDay,
     gender, 
- } = user;
+  } = user;
 
- const yearTemp = new Date().getFullYear()
+  const yearTemp = new Date().getFullYear()
 
- const years = Array.from(new Array(108), (val, index) => yearTemp - index)
- const months = Array.from(new Array(12), (val, index) => 1 + index)
+  const years = Array.from(new Array(108), (val, index) => yearTemp - index)
+  const months = Array.from(new Array(12), (val, index) => 1 + index)
 
- const getDays = () => {
+  const getDays = () => {
   return new Date(bYear,bMonth,0).getDate()
- }
+  }
 
- const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
+  const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
 
- const registerValidation=Yup.object({
-  first_name: Yup.string().required("What's your first name")
-  .min(2, 'First name must be betweeen 2 and 16 characters.')
-  .max(16, 'First name must be betweeen 2 and 16 characters.')
-  .matches(/^[aA-zA\s]+$/, 'Numbers and special characters are not allowed'),
+  const registerValidation=Yup.object({
+    first_name: Yup.string().required("What's your first name")
+    .min(2, 'First name must be betweeen 2 and 16 characters.')
+    .max(16, 'First name must be betweeen 2 and 16 characters.')
+    .matches(/^[aA-zA\s]+$/, 'Numbers and special characters are not allowed'),
 
-  last_name: Yup.string().required("What's your last name")
-  .min(2, 'First name must be betweeen 2 and 16 characters.')
-  .max(16, 'First name must be betweeen 2 and 16 characters.')
-  .matches(/^[aA-zA\s]+$/, 'Numbers and special characters are not allowed'),
+    last_name: Yup.string().required("What's your last name")
+    .min(2, 'First name must be betweeen 2 and 16 characters.')
+    .max(16, 'First name must be betweeen 2 and 16 characters.')
+    .matches(/^[aA-zA\s]+$/, 'Numbers and special characters are not allowed'),
 
-  email:Yup.string().required("You'll need this when you log in and if you ever need to reset your password")
-  .email("Enter a valid email address"),
+    email:Yup.string().required("You'll need this when you log in and if you ever need to reset your password")
+    .email("Enter a valid email address"),
 
-  password: Yup.string().required("Enter a combination of at least six numbers, letters and ponctuation marks (such as ! and &)")
-  .min(6, 'Password must be betweeen 2 and 16 characters.')
-  .max(36, "Password can't be more than 16 characters.")
+    password: Yup.string().required("Enter a combination of at least six numbers, letters and ponctuation marks (such as ! and &)")
+    .min(6, 'Password must be betweeen 2 and 16 characters.')
+    .max(36, "Password can't be more than 16 characters.")
 
- })
+  })
 
   const handleRegisterChange = (e) => {
     const {name, value} = e.target;
@@ -92,12 +92,20 @@ function RegisterForm() {
         }}
         validationSchema={registerValidation}>
           <Form className='register_form'>
+
             <div className="reg_line">
               <RegisterInput type="text" placeholder="First name" name='first_name' onChange={handleRegisterChange}/>
+            </div>
+            
+            <div className="reg_line">  
               <RegisterInput type="text" placeholder="Surname" name='last_name' onChange={handleRegisterChange}/>
             </div>
+
             <div className="reg_line">
               <RegisterInput type="text" placeholder="Mobile number or email address" name='email' onChange={handleRegisterChange}/>
+            </div>
+
+            <div className="reg_line">
               <RegisterInput type="password" placeholder="New Password" name='password' onChange={handleRegisterChange}/>
             </div>
 
