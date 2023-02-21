@@ -2,12 +2,22 @@ import { Form, Formik } from 'formik'
 
 import React, { useState } from 'react'
 
+//Redux
+import { useDispatch } from 'react-redux'
+
+import { useNavigate } from 'react-router-dom'
+
+//Axios
 import axios from 'axios'
 
 //Special Input
 import RegisterInput from '../input/registerInput'
 
+//React Spinners
 import DotLoader from "react-spinners/DotLoader";
+
+//Cookies
+import Cookies from 'js-cookie'
 
 //Validation
 import * as Yup from "yup"
@@ -17,6 +27,8 @@ import DateOfBirthSelect from './DateOfBirthSelect';
 import GenderSelect from './GenderSelect';
 
 function RegisterForm() {
+
+  const navigate = useNavigate()
 
   const userInfos = {
     first_name: "",
@@ -85,6 +97,8 @@ function RegisterForm() {
   const [success, setSuccess] = useState("")
   const [loading, setLoading] = useState(false)
 
+  const dispatch = useDispatch()
+
   const registerSubmit = async() => {
     try {
       const {data} = await axios.post(`http://localhost:8000/register`,
@@ -100,6 +114,18 @@ function RegisterForm() {
       })
       setError("")
       setSuccess(data.message)
+
+      const{message, ...rest} = data
+
+      setTimeout(()=>{
+          dispatch({type: "LOGIN", payload: rest})
+          console.log("Before Cookies")
+          Cookies.set("user", JSON.stringify(rest))
+          console.log("After Cookies")
+          navigate("/")
+          console.log("End")
+      }, 2000)
+
     } catch (error) {
       setLoading(false)
       setSuccess("")
