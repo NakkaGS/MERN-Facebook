@@ -2,7 +2,12 @@ import { Form, Formik } from 'formik'
 
 import React, { useState } from 'react'
 
+import axios from 'axios'
+
+//Special Input
 import RegisterInput from '../input/registerInput'
+
+import DotLoader from "react-spinners/DotLoader";
 
 //Validation
 import * as Yup from "yup"
@@ -76,7 +81,31 @@ function RegisterForm() {
   const [dateError, setDateError] = useState("")
   const [genderError, setGenderError] = useState("")
 
-  
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const registerSubmit = async() => {
+    try {
+      const {data} = await axios.post(`http://localhost:8000/register`,
+      {
+        first_name, 
+        last_name,
+        email,
+        password,
+        bYear,
+        bMonth,
+        bDay,
+        gender, 
+      })
+      setError("")
+      setSuccess(data.message)
+    } catch (error) {
+      setLoading(false)
+      setSuccess("")
+      setError(error.response.data.message)
+    }
+  }
 
   return (
     <div className="blur">
@@ -110,16 +139,15 @@ function RegisterForm() {
           let noMoreThan70 = new Date(1970 + 70, 0, 1)
 
           if (current_date - picked_date < atLeast14){
-            console.log(gender)
             setDateError("It looks like you have entered the wrong info. Please make sure that you use your real date of birth.")
           } else if (current_date- picked_date > noMoreThan70) {
             setDateError("It looks like you have entered the wrong info. Please make sure that you use your real date of birth.")
           } else if (gender === ""){ 
             setGenderError("Please choose a gender. You can change who can see this later")
           } else {
-            console.log(gender)
             setDateError("")
             setGenderError("")
+            registerSubmit()
           }
 
         }}>
@@ -179,6 +207,13 @@ function RegisterForm() {
               <div className="reg_btn_wrapper">
                 <button className="blue_btn open_signup">Sign Up</button>
               </div>
+              <DotLoader
+                color="#1876f2"
+                loading={loading}
+                size={30}
+              />
+              {error && <dir className="error_text">{error}</dir>}
+              {success && <dir className="success_text">{success}</dir>}
 
           </Form>
         </Formik>
