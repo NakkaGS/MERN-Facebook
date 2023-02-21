@@ -95,9 +95,7 @@ function RegisterForm() {
 
             <div className="reg_line">
               <RegisterInput type="text" placeholder="First name" name='first_name' onChange={handleRegisterChange}/>
-            </div>
-            
-            <div className="reg_line">  
+
               <RegisterInput type="text" placeholder="Surname" name='last_name' onChange={handleRegisterChange}/>
             </div>
 
