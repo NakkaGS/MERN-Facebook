@@ -1,20 +1,16 @@
-import { Form, Formik } from 'formik'
-
 import React, { useState } from 'react'
+
+//Formik
+import { Form, Formik } from 'formik'
 
 //Redux
 import { useDispatch } from 'react-redux'
 
+//Router-Dom
 import { useNavigate } from 'react-router-dom'
 
 //Axios
 import axios from 'axios'
-
-//Special Input
-import RegisterInput from '../input/registerInput'
-
-//React Spinners
-import DotLoader from "react-spinners/DotLoader";
 
 //Cookies
 import Cookies from 'js-cookie'
@@ -22,13 +18,20 @@ import Cookies from 'js-cookie'
 //Validation
 import * as Yup from "yup"
 
+//React Spinners
+import DotLoader from "react-spinners/DotLoader";
+
+//Special Input
+import RegisterInput from '../input/registerInput'
+
 //Components
 import DateOfBirthSelect from './DateOfBirthSelect';
 import GenderSelect from './GenderSelect';
 
-function RegisterForm() {
+function RegisterForm({setVisible}) {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const userInfos = {
     first_name: "",
@@ -42,6 +45,13 @@ function RegisterForm() {
   };
 
   const [user, setUser] = useState(userInfos);
+
+  const [dateError, setDateError] = useState("")
+  const [genderError, setGenderError] = useState("")
+
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const {
     first_name, 
@@ -90,15 +100,6 @@ function RegisterForm() {
     setUser({ ...user, [name]:value })
   }
 
-  const [dateError, setDateError] = useState("")
-  const [genderError, setGenderError] = useState("")
-
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
-  const [loading, setLoading] = useState(false)
-
-  const dispatch = useDispatch()
-
   const registerSubmit = async() => {
     try {
       const {data} = await axios.post(`http://localhost:8000/register`,
@@ -112,6 +113,7 @@ function RegisterForm() {
         bDay,
         gender, 
       })
+      
       setError("")
       setSuccess(data.message)
 
@@ -119,11 +121,8 @@ function RegisterForm() {
 
       setTimeout(()=>{
           dispatch({type: "LOGIN", payload: rest})
-          console.log("Before Cookies")
           Cookies.set("user", JSON.stringify(rest))
-          console.log("After Cookies")
           navigate("/")
-          console.log("End")
       }, 2000)
 
     } catch (error) {
@@ -137,7 +136,7 @@ function RegisterForm() {
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <i className="exit_icon"></i>
+          <i className="exit_icon" onClick={() => setVisible(false)}></i>
           <span>Sign Up</span>
           <span>It's quick axnd easy</span>
         </div>

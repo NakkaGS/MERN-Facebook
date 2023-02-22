@@ -1,13 +1,25 @@
 import React, { useState } from 'react'
 
-//React Router
-import { Link } from 'react-router-dom'
+// Formik Forms
+import { Formik, Form } from 'formik'
+
+//Redux
+import { useDispatch } from 'react-redux'
+
+//Router-Dom
+import { useNavigate, Link } from 'react-router-dom'
+
+//Axios
+import axios from 'axios'
+
+//Cookies
+import Cookies from 'js-cookie'
 
 //Validation
 import * as Yup from "yup"
 
-// Formik Forms
-import { Formik, Form } from 'formik'
+//React Spinners
+import DotLoader from "react-spinners/DotLoader";
 
 // Components
 import LoginInput from '../../components/input/loginInput'
@@ -17,9 +29,16 @@ const loginInfos = {
   password: ""
 }
 
-function LoginForm() {
+function LoginForm({setVisible}) {
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const[login, setLogin] = useState(loginInfos);
     const{ email, password } = login
+
+    const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
   
     const handleLoginChange = (e) => {
       const {name, value} = e.target
@@ -30,6 +49,25 @@ function LoginForm() {
       email: Yup.string().required('Email address is required').email('Must be a valid email').max(100),
       password: Yup.string().required('Password is required'),
     })
+
+    const loginSubmit = async() => {
+        try {
+            const {data} = await axios.post(`http://localhost:8000/login`, {
+                email,
+                password,
+            })
+
+            setError("")
+      
+            dispatch({type: "LOGIN", payload: data})
+            Cookies.set("user", JSON.stringify(data))
+            navigate("/")
+
+        } catch (error) {
+            setLoading(false)
+            setError(error.response.data.message)
+        }
+    }
 
     return (
         <div className="login_wrap">
@@ -47,7 +85,9 @@ function LoginForm() {
                 email,
                 password,
                 }}
-                validationSchema={loginValidation}>
+                validationSchema={loginValidation}
+                onSubmit={() => loginSubmit()}>
+                
                 {
                 <Form>
                     <LoginInput
@@ -72,8 +112,9 @@ function LoginForm() {
             <Link to="/forgot" className="forgot_password">
                 Forgotten password?
             </Link>
+            {error && <dir className="error_text">{error}</dir>}
             <div className="sign_slitter"></div>
-            <button className="blue_btn open_signup">Create Account</button>
+            <button className="blue_btn open_signup" onClick={() => setVisible(true)}>Create Account</button>
             </div>
             <Link to="/" className="sign_extra">
             <b>Create a Page</b> for a celebrity, brand or business
