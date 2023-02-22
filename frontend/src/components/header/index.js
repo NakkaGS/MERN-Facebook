@@ -5,10 +5,25 @@ import './style.css'
 
 //Router-Dom
 import { Link } from 'react-router-dom'
-import { Friends, FriendsActive, Gaming, HomeActive, Logo, Market, Search, Watch } from '../../svg'
+import { 
+    ArrowDown, 
+    Friends, 
+    Gaming, 
+    HomeActive, 
+    Logo, 
+    Market, 
+    Menu, 
+    Messenger, 
+    Notifications, 
+    Search, 
+    Watch } from '../../svg'
 
-function index() {
+// Redux
+import { useSelector } from 'react-redux'
 
+function Header() {
+
+    const { user } = useSelector((user) => ({ ...user }))
     const color = '#65676b'
 
     return (
@@ -45,9 +60,27 @@ function index() {
                 </Link>
             </div>
 
-            <div className="header_right"></div>
+            <div className="header_right">
+                <Link to="/profile" className='profile_link hover1'>
+                    <img src={user?.picture} alt="" />
+                    <span>{user?.first_name}</span>
+                </Link>
+                <div className="circle_icon hover1">
+                    <Menu/>
+                </div>
+                <div className="circle_icon hover1">
+                    <Messenger/>
+                </div>
+                <div className="circle_icon hover1">
+                    <Notifications/>
+                    <div className="right_notification">5</div>
+                </div>
+                <div className="circle_icon hover1">
+                    <ArrowDown/>
+                </div>
+            </div>
         </header>
     )
 }
 
-export default index
+export default Header
