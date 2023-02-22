@@ -1,5 +1,10 @@
+//Styling
 import "./style.css";
+
+//Formik Forms
 import { useField, ErrorMessage } from "formik";
+
+//Responsive
 import { useMediaQuery } from "react-responsive";
 
 export default function RegisterInput({ placeholder, bottom, ...props }) {

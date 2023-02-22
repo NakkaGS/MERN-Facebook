@@ -1,6 +1,9 @@
-import './style.css'
 import React, { useState } from 'react'
 
+//Styling
+import './style.css'
+
+//Components
 import LoginForm from '../../components/login/LoginForm'
 import Footer from '../../components/login/Footer'
 import RegisterForm from '../../components/login/RegisterForm'
