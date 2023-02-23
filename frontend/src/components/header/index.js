@@ -20,6 +20,7 @@ import {
 
 // Redux
 import { useSelector } from 'react-redux'
+import SearchMenu from './SearchMenu'
 
 function Header() {
 
@@ -40,6 +41,8 @@ function Header() {
                     <input type="text" placeholder='Search Facebook' className="hide_input" />
                 </div>
             </div>
+
+            <SearchMenu color={color}/>
 
             <div className="header_middle">
                 <Link to="/" className='middle_icon hover1 active'>
