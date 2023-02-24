@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //Styling
 import './style.css'
@@ -25,6 +25,9 @@ import SearchMenu from './SearchMenu'
 function Header() {
 
     const { user } = useSelector((user) => ({ ...user }))
+
+    const [showSearchMenu, setShowSearchMenu] = useState(false)
+
     const color = '#65676b'
 
     return (
@@ -36,13 +39,13 @@ function Header() {
                         <Logo/>
                     </div>
                 </Link>
-                <div className="search search1">
+                <div className="search search1" onClick={()=> {setShowSearchMenu(true)}}>
                     <Search color={color}/>
                     <input type="text" placeholder='Search Facebook' className="hide_input" />
                 </div>
             </div>
 
-            <SearchMenu color={color}/>
+            {showSearchMenu && <SearchMenu color={color} setShowSearchMenu={setShowSearchMenu}/>}
 
             <div className="header_middle">
                 <Link to="/" className='middle_icon hover1 active'>
