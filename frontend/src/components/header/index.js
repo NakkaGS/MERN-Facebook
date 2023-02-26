@@ -5,6 +5,8 @@ import './style.css'
 
 //Router-Dom
 import { Link } from 'react-router-dom'
+
+//SVG
 import { 
     ArrowDown, 
     Friends, 
@@ -20,9 +22,14 @@ import {
 
 // Redux
 import { useSelector } from 'react-redux'
+
+//Components
 import SearchMenu from './SearchMenu'
 import AllMenu from './AllMenu'
+
+//Helpers
 import useClickOutside from '../../helpers/clickOutside'
+import UserMenu from './UserMenu'
 
 function Header() {
 
@@ -91,6 +98,7 @@ function Header() {
                 </div>
                 <div className="circle_icon hover1">
                     <ArrowDown/>
+                    <UserMenu user={user}/>
                 </div>
             </div>
         </header>
