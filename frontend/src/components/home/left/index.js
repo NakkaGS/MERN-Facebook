@@ -1,9 +1,19 @@
-import LeftLink from "./LeftLink";
-import "./style.css";
-import { left } from "../../../data/home";
-import { Link } from "react-router-dom";
-import { ArrowDown1 } from "../../../svg";
 import { useState } from "react";
+
+//Styling
+import "./style.css";
+
+//Data
+import { left } from "../../../data/home";
+
+//Router Dom
+import { Link } from "react-router-dom";
+
+//SVG
+import { ArrowDown1 } from "../../../svg";
+
+//Components
+import LeftLink from "./LeftLink";
 import Shortcut from "./Shortcut";
 
 export default function LeftHome({ user }) {

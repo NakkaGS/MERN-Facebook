@@ -1,4 +1,6 @@
 import React from 'react'
+
+//Redux
 import { useSelector } from 'react-redux'
 
 //Components

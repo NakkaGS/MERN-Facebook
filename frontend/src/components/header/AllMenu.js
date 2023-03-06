@@ -1,6 +1,9 @@
 import React from 'react'
 
+//Data
 import{menu, create} from '../../data/allMenu'
+
+//Component
 import AllMenuItem from './AllMenuItem'
 
 export default function AllMenu() {
