@@ -3,13 +3,12 @@ const cors = require('cors')
 
 const mongoose = require('mongoose')
 
-// reads the javacript file
+//reads the javacript file
 const { readdirSync } = require('fs')
 
-// .env
+//.env
 const dotenv = require('dotenv')
 dotenv.config()
-
 
 //create app in express
 const app = express();
@@ -25,6 +24,7 @@ mongoose.connect(process.env.MONGODBURL)
 .then(() => console.log("Database Connected Sucessfully"))
 .catch((err) => console.log("Error Connecting to MongoDB", err))
 
+//Port from the env file OR 8000
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {

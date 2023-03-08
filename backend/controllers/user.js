@@ -1,15 +1,18 @@
+//Helpers
+const { sendVerificationEmail } = require("../helpers/mailer")
+const { generateToken } = require("../helpers/tokens")
 const { validateEmail, validateLength, validateUsername } = require("../helpers/validation")
 
-const { generateToken } = require("../helpers/tokens")
-
-const { sendVerificationEmail } = require("../helpers/mailer")
-
+//Model
 const User = require("../models/User");
 
+//JSON Web Token
 const jwt = require("jsonwebtoken")
 
+//Create Hash
 const bcrypt = require('bcrypt')
 
+/////////////////////////////////////////////////
 exports.register = async (req, res) => {
     try {
         const {
@@ -105,6 +108,7 @@ exports.register = async (req, res) => {
     
 };
 
+/////////////////////////////////////////////////
 exports.activateAccount = async(req, res) => {
     try {
         const { token } = req.body;
@@ -125,6 +129,7 @@ exports.activateAccount = async(req, res) => {
 
 }
 
+/////////////////////////////////////////////////
 exports.login = async(req,res) => {
     try {
         const {email,password} = req.body;
@@ -155,4 +160,9 @@ exports.login = async(req,res) => {
     } catch (error) {
         res.status(500).json({Message: error.message})
     }
+}
+
+/////////////////////////////////////////////////
+exports.auth = async(req, res) => {
+    res.json('Welcome from auth')
 }

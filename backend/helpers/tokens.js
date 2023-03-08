@@ -1,4 +1,5 @@
-const jwt = require('jsonwebtoken')
+//JSON Web Token
+const jwt = require("jsonwebtoken")
 
 exports.generateToken = (payload, expired) => {
     return jwt.sign(payload, process.env.TOKEN_SECRET, 
