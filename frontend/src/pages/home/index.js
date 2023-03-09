@@ -15,7 +15,7 @@ import CreatePost from '../../components/createPost'
 
 function Home() {
   const { user } = useSelector((user) => ({...user}));
-  
+
   return (
     <div className='home'>
       <Header/>
