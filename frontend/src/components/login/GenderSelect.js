@@ -3,7 +3,7 @@ import React from 'react'
 //Responsive
 import { useMediaQuery } from "react-responsive";
 
-function GenderSelect({
+export default function GenderSelect({
     handleRegisterChange,
     genderError,    
 }) {
@@ -44,5 +44,3 @@ function GenderSelect({
         </div>
     )
 }
-
-export default GenderSelect

@@ -8,7 +8,7 @@ import LoginForm from '../../components/login/LoginForm'
 import Footer from '../../components/login/Footer'
 import RegisterForm from '../../components/login/RegisterForm'
 
-function Login() {
+export default function Login() {
 
   const [visible, setVisible] = useState(false)
 
@@ -26,5 +26,3 @@ function Login() {
     </div>
   )
 }
-
-export default Login

@@ -28,7 +28,7 @@ import RegisterInput from '../input/registerInput'
 import DateOfBirthSelect from './DateOfBirthSelect';
 import GenderSelect from './GenderSelect';
 
-function RegisterForm({setVisible}) {
+export default function RegisterForm({setVisible}) {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -246,5 +246,3 @@ function RegisterForm({setVisible}) {
     </div>
   )
 }
-
-export default RegisterForm

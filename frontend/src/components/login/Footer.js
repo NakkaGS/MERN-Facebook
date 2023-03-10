@@ -3,7 +3,7 @@ import React from 'react'
 //Router-Dom
 import { Link } from 'react-router-dom'
 
-function Footer() {
+export default function Footer() {
     return (
         <footer className="login_footer">
 
@@ -69,5 +69,3 @@ function Footer() {
         </footer>
     )
 }
-
-export default Footer

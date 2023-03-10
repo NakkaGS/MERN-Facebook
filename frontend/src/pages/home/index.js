@@ -13,7 +13,7 @@ import RightHome from '../../components/home/right'
 import Stories from '../../components/home/stories'
 import CreatePost from '../../components/createPost'
 
-function Home() {
+export default function Home() {
   const { user } = useSelector((user) => ({...user}));
 
   return (
@@ -28,5 +28,3 @@ function Home() {
     </div>
   )
 }
-
-export default Home

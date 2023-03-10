@@ -29,7 +29,7 @@ const loginInfos = {
   password: ""
 }
 
-function LoginForm({setVisible}) {
+export default function LoginForm({setVisible}) {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -132,5 +132,3 @@ function LoginForm({setVisible}) {
         </div>
     );
 }
-
-export default LoginForm;

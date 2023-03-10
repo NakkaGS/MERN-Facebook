@@ -31,7 +31,7 @@ import AllMenu from './AllMenu'
 import useClickOutside from '../../helpers/clickOutside'
 import UserMenu from './UserMenu'
 
-function Header() {
+export default function Header() {
 
     const { user } = useSelector((user) => ({ ...user }))
 
@@ -128,5 +128,3 @@ function Header() {
         </header>
     )
 }
-
-export default Header
