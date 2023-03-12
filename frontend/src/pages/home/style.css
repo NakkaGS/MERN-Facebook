@@ -148,6 +148,10 @@
     .left_home::-webkit-scrollbar {
         display: none;
     }
+
+    .popup {
+        width: 70vw !important;
+    }
 }
 
 @media (max-width: 620px) {
@@ -196,13 +200,14 @@
     position: relative;
     background: var(--bg-primary);
     box-shadow: 0 1px 2px var(--shadow-1);
-    width: 30vw;
-    height: 200px;
+    width: 40vw;
+    height: 170px;
     top: 40%;
     position: fixed;
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 99;
+    border-radius: 10%;
 
 }
 
