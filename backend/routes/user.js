@@ -13,8 +13,8 @@ const router = express.Router()
 // })
 
 router.post("/register", register)
-router.post("/activate", activateAccount)
+router.post("/activate", authUser, activateAccount) //if authUser is right, then it will return req.user
 router.post("/login", login)
-router.post("/auth", authUser, auth) //if authUser is right, then it will return req.user
+//router.post("/auth", authUser, auth) //if authUser is right, then it will return req.user
 
 module.exports = router

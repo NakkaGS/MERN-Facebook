@@ -34,7 +34,7 @@ function Activate() {
     const { token } = useParams()
 
     const activateAccount = async() => {
-        try {
+        try {            
             setLoading(true)
             const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/activate`, 
             {token}, 
