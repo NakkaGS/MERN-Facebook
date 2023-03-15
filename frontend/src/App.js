@@ -7,7 +7,7 @@ import Profile from './pages/profile'
 import Home from './pages/home'
 import Activate from './pages/home/activate'
 import LoggedInRoutes from './routes/LoggedInRoutes';
-import NotLoggedInRoutes from './routes/NotLoggedInRoutesjs';
+import NotLoggedInRoutes from './routes/NotLoggedInRoutes';
 
 function App() {
   return <div>

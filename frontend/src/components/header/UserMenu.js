@@ -1,7 +1,14 @@
 import React, { useState } from 'react'
 
+//Redux
+import { useDispatch } from 'react-redux'
+
+//Cookies - get the data from cookie
+import Cookies from 'js-cookie'
+
 //Router Dom
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { USER_LOGOUT } from '../../constants/userConstants'
 
 //Components
 import DisplayAccessibility from './userMenu/DisplayAccessibility'
@@ -10,7 +17,18 @@ import SettingsPrivacy from './userMenu/SettingsPrivacy'
 
 export default function UserMenu({ user }) {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [visible, setVisible] = useState(0)
+
+    const logout = () => {
+        Cookies.set('user', "")
+        dispatch({
+            type: "LOGOUT",
+        })
+        navigate("/login")
+    }
 
     return (
         <div className="mmenu">
@@ -78,7 +96,7 @@ export default function UserMenu({ user }) {
                         </div>
                     </div>
 
-                    <div className="mmenu_item hover3">
+                    <div className="mmenu_item hover3" onClick={() => logout()}>
                         <div className="small_circle">
                             <i className="logout_filled_icon"></i>
                         </div>
