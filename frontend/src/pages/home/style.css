@@ -14,7 +14,8 @@
 
 @media (max-width: 1175px) {
     .stories, 
-    .createPost {
+    .createPost, 
+    .send_verification {
         width: 84% !important;
     }
 
@@ -68,13 +69,15 @@
     }
 
     .stories, 
-    .createPost {
+    .createPost 
+    .send_verification {
         width: 100% !important;
     }
 }
 
 @media (max-width: 960px) {
-    .createPost {
+    .createPost,
+    .send_verification {
         width: 93% !important;
     }
 
@@ -109,7 +112,8 @@
         display: none;
     }
 
-    .createPost {
+    .createPost,
+    .send_verification {
         width: 110% !important;
     }
 
@@ -165,7 +169,8 @@
     }
 
     .stories,
-    .createPost {
+    .createPost,
+    .send_verification {
         width: 100% !important;
     }
 

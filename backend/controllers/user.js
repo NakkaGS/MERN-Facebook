@@ -177,7 +177,7 @@ exports.auth = async(req, res) => {
 exports.sendVerification = async(req, res) => {
     try {
         const id = req.user.id
-        const user = User.findById(id)
+        const user = await User.findById(id)
         if(user.verified == true) {
             return res.status(400).json({
                 message: "This account is already activated"

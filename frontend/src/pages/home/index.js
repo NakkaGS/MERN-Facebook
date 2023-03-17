@@ -12,9 +12,10 @@ import LeftHome from '../../components/home/left'
 import RightHome from '../../components/home/right'
 import Stories from '../../components/home/stories'
 import CreatePost from '../../components/createPost'
+import SendVerification from '../../components/sendVerification'
 
 export default function Home() {
-  const { user } = useSelector((user) => ({...user}));
+  const { user } = useSelector((state) => ({...state}));
 
   return (
     <div className='home'>
@@ -22,6 +23,11 @@ export default function Home() {
       <LeftHome user={user}/>
       <div className="home_middle">
         <Stories/>
+        
+        {
+          user.verified && <SendVerification user={user}/>
+        }
+
         <CreatePost user={user}/>
       </div>
       <RightHome user={user}/>
