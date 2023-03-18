@@ -29,7 +29,7 @@ import AllMenu from './AllMenu'
 
 //Helpers
 import useClickOutside from '../../helpers/clickOutside'
-import UserMenu from './UserMenu'
+import UserMenu from './userMenu'
 
 export default function Header() {
 
@@ -120,7 +120,7 @@ export default function Header() {
                         <ArrowDown/>
                     </div>
                     
-                    {showUserMenu && <UserMenu user={user}/>}
+                    {showUserMenu && <UserMenu   user={user}/>}
                     
                 </div>
             </div>
