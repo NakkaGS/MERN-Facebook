@@ -18,6 +18,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 //axios - it can be create as action
 import axios from "axios"
 
+//Cookies
 import Cookies from 'js-cookie'
 
 function Activate() {

@@ -1,5 +1,9 @@
 import { useState } from "react"
+
+//Styling
 import "./style.css"
+
+//axios - Http Request
 import axios from 'axios'
 
 export default function SendVerification({ user }) {

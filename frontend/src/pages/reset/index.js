@@ -1,8 +1,13 @@
-import { Link, useNavigate } from "react-router-dom"
+//Styling
 import "./style.css"
 
+//Router Dom
+import { Link, useNavigate } from "react-router-dom"
+
+//Redux
 import { useDispatch, useSelector } from 'react-redux'
 
+//Cookies
 import Cookies from 'js-cookie'
 
 export default function Reset() {
