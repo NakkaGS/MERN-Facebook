@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 //Styling
 import "./style.css"
 
@@ -11,11 +13,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
 
 //Formik
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 
 // Components
-import LoginInput from '../../components/input/loginInput'
-import LoginForm from "../../components/login/LoginForm"
+import LoginInput from "../../components/input/loginInput"
 
 export default function Reset() {
 
@@ -70,7 +71,7 @@ export default function Reset() {
                         email,
                     }}>
                         <Form>
-                            <LoginForm 
+                            <LoginInput 
                             type="text" 
                             name="email" 
                             onChange={(e) => setEmail(e.target.value)}
@@ -78,7 +79,7 @@ export default function Reset() {
                             />
                             {error && <div className="error_text">{error}</div>}
                             <div className="reset_form_btns">
-                                <Link to="/login" className="gray-btn">Cancel</Link>
+                                <Link to="/login" className="gray_btn">Cancel</Link>
                                 <button type="submit" className="blue_btn">Sign In</button>
                             </div>
                         </Form>
