@@ -17,6 +17,7 @@ import CodeVerification from "./CodeVerification"
 
 //Components
 import Footer from "../../components/login/Footer"
+import ChangePassword from "./ChangePassword"
 
 export default function Reset() {
 
@@ -25,11 +26,17 @@ export default function Reset() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [visible, setVisible] = useState(2)
+    const [visible, setVisible] = useState(0)
     const [email, setEmail] = useState("")
     const [error, setError] = useState("")
 
+    //Code Verification
     const [code, setCode] = useState("")
+
+    //Change Password
+    const [password, setPassword] = useState("")
+    const [conf_password, setConf_password] = useState("")
+
 
     const logout = () => {
         Cookies.set('user', "")
@@ -73,6 +80,11 @@ export default function Reset() {
         {visible === 2 && (
             <CodeVerification code={code} setCode={setCode} error={error}/>
         )}
+
+        {visible = 3 && (
+          <ChangePassword password={password} setPassword={setPassword} conf_password={conf_password} setConf_password={setConf_password} error={error}/>
+        )}
+
       </div>
       <Footer/>
     </div>

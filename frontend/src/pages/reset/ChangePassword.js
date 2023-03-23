@@ -7,28 +7,33 @@ import { Form, Formik } from 'formik'
 // Components
 import LoginInput from "../../components/input/loginInput"
 
-export default function SearchAccount({ email, setEmail, error}) {
+export default function ChangePassword({ password, setPassword, conf_password, setConf_password, error}) {
     return (
-        <div className="reset_form">
-            <div className="reset_form_header">Find Your Account</div>
+        <div className="reset_form" style={{height:"310px"}}>
+            <div className="reset_form_header">Change Password</div>
             <div className="reset_form_text">
-            Please enter your email address or mobile number to search for your
-            account.
+            Pick a strong password.
             </div>
             <Formik
             enableReinitialize
             initialValues={{
-                email,
+                password,
+                conf_password,
             }}
-            validationSchema={validateEmail}
             >
             {(formik) => (
                 <Form>
                 <LoginInput
                     type="text"
-                    name="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email address or phone number"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="New password"
+                />
+                <LoginInput
+                    type="text"
+                    name="conf_password"
+                    onChange={(e) => setConf_password(e.target.value)}
+                    placeholder="Confirm new password"
                 />
                 {error && <div className="error_text">{error}</div>}
                 <div className="reset_form_btns">
@@ -36,7 +41,7 @@ export default function SearchAccount({ email, setEmail, error}) {
                     Cancel
                     </Link>
                     <button type="submit" className="blue_btn">
-                    Search
+                    Continue
                     </button>
                 </div>
                 </Form>
