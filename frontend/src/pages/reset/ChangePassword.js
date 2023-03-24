@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom"
 //Formik
 import { Form, Formik } from 'formik'
 
+//Yup
+import * as Yup from "yup"
+
 // Components
 import LoginInput from "../../components/input/loginInput"
 
