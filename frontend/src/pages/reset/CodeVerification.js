@@ -4,10 +4,20 @@ import { Link, useNavigate } from "react-router-dom"
 //Formik
 import { Form, Formik } from 'formik'
 
+//Yup
+import * as Yup from "yup"
+
 // Components
 import LoginInput from "../../components/input/loginInput"
 
 export default function CodeVerification({ code, setCode, error}) {
+
+    const validateCode = Yup.object ({
+        code: Yup.string()
+            .required("Code is required")
+            .min("5", "Code must be 5 characters.")
+            .max("25", "Code must be 25 characters.")
+    })
     return (
         <div className="reset_form">
             <div className="reset_form_header">Code Verification</div>
@@ -19,6 +29,7 @@ export default function CodeVerification({ code, setCode, error}) {
             initialValues={{
                 code,
             }}
+            validationSchema={validateCode}
             >
             {(formik) => (
                 <Form>
