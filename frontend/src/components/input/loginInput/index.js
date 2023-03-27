@@ -15,11 +15,23 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
     query: "(min-width: 850px)"
   })
 
+  const view1050 = useMediaQuery ({
+    //it gives true if the screen is in the right size
+    query: "(min-width: 1050px)"
+  })
+
   return (
     <div className="input_wrap">
 
       {meta.touched && meta.error && !bottom &&
-        <div className={desktopView ? "input_error input_error_desktop" : "input_error"}>
+        <div 
+          className={ 
+            desktopView && view1050 && field.name === 'password'
+            ? "input_error input_error_desktop err_res_password"
+            : desktopView 
+            ? "input_error input_error_desktop" 
+            : "input_error"}
+        >
           {meta.touched && meta.error && <ErrorMessage name={field.name}/>}
           {meta.touched && meta.error && (
             <div className={desktopView ? "error_arrow_left" : "error_arrow_top"}></div>
@@ -37,7 +49,11 @@ export default function LoginInput({ placeholder, bottom, ...props }) {
       />
 
       {meta.touched && meta.error && bottom &&
-        <div className={desktopView ? "input_error input_error_desktop" : "input_error"}>
+        <div className={desktopView && view1050 && field.name === "conf_password"
+        ? "input_error con_password_error" 
+        : desktopView 
+        ? "input_error input_error_desktop"  
+        : "input_error"}>
           {meta.touched && meta.error && <ErrorMessage name={field.name}/>}
           {meta.touched && meta.error && (
             <div className={desktopView ? "error_arrow_left" : "error_arrow_bottom"}></div>
