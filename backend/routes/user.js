@@ -1,7 +1,7 @@
 const express = require("express")
 
 //Controller
-const { register, activateAccount, login, auth, sendVerification, findUser } = require("../controllers/user")
+const { register, activateAccount, login, auth, sendVerification, findUser, sendResetPasswordCode } = require("../controllers/user")
 
 //Middlewares
 const { authUser } = require("../middlewares/auth")
@@ -17,6 +17,7 @@ router.post("/activate", authUser, activateAccount) //if authUser is right, then
 router.post("/login", login)
 router.post("/sendVerification", authUser, sendVerification)
 router.post("/findUser", findUser)
+router.post("/sendResetPasswordCode", sendResetPasswordCode)
 //router.post("/auth", authUser, auth) //if authUser is right, then it will return req.user
 
 module.exports = router

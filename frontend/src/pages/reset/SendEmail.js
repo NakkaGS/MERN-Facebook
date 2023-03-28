@@ -1,7 +1,34 @@
 //Router Dom
 import { Link } from "react-router-dom"
 
-export default function SendEmail({ userInfo}) {
+//Axios
+import axios from "axios"
+
+export default function SendEmail({ 
+    userInfo, 
+    email,
+    error, 
+    setError, 
+    setVisible, 
+    setUserInfo,
+    loading, 
+    setLoading,
+}) {
+    const sendEmail = async()=> {
+        try {
+            setLoading(true);
+            await axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/sendResetPasswordCode`,
+                { email }
+            )
+            setError("")
+            setVisible(2)
+        } catch (error) {
+            setLoading(false)
+            setError(error.response.data.message)
+        }
+    }
+
     return (
         <div className="reset_form dynamic_height">
             <div className="reset_form_header">Reset your Password</div>
@@ -29,7 +56,9 @@ export default function SendEmail({ userInfo}) {
                     <Link to="/login" className="gray_btn">
                     Not you?
                     </Link>
-                    <button type="submit" className="blue_btn">
+                    <button onclick={()=> {
+                        sendEmail();
+                    }} className="blue_btn">
                     Continue
                     </button>
                 </div>

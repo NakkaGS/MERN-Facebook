@@ -78,7 +78,7 @@ export default function Reset() {
           <SearchAccount email={email} setEmail={setEmail} error={error} setError={setError} setLoading={setLoading} setUserInfo={setUserInfo} setVisible={setVisible}/>
         )}
         {visible === 1 && userInfo && (
-          <SendEmail userInfo={userInfo}/>
+          <SendEmail userInfo={userInfo} email={userInfo?.email} error={error} setError={setError} loading={loading} setLoading={setLoading} setUserInfo={setUserInfo} setVisible={setVisible}/>
         )}
         {visible === 2 && (
           <CodeVerification code={code} setCode={setCode} error={error}/>
