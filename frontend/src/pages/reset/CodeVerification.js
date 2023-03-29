@@ -10,7 +10,33 @@ import * as Yup from "yup"
 // Components
 import LoginInput from "../../components/input/loginInput"
 
-export default function CodeVerification({ code, setCode, error}) {
+export default function CodeVerification({ 
+    code, 
+    setCode, 
+    error,
+    setError,
+    loading,
+    setLoading,
+    userInfo,
+    setVisible
+}) {
+    const { email } = userInfo
+
+    const verifyCode = async() => {
+        try {
+            setLoading(true)
+            await axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/validateResetCode`,
+                { email, code }
+            )
+            setError("")
+            setVisible(3)
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            setError(error.response.data.message)
+        }
+    }
 
     const validateCode = Yup.object ({
         code: Yup.string()
@@ -30,6 +56,9 @@ export default function CodeVerification({ code, setCode, error}) {
                 code,
             }}
             validationSchema={validateCode}
+            onSubmit={() => {
+                verifyCode()
+            }}
             >
             {(formik) => (
                 <Form>

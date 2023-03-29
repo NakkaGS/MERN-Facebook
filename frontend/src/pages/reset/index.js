@@ -75,16 +75,44 @@ export default function Reset() {
       </div>
       <div className="reset_wrap">
         {visible === 0 && (
-          <SearchAccount email={email} setEmail={setEmail} error={error} setError={setError} setLoading={setLoading} setUserInfo={setUserInfo} setVisible={setVisible}/>
+          <SearchAccount 
+            email={email} 
+            setEmail={setEmail} 
+            error={error} 
+            setError={setError} 
+            setLoading={setLoading} 
+            setUserInfo={setUserInfo} 
+            setVisible={setVisible}/>
         )}
         {visible === 1 && userInfo && (
-          <SendEmail userInfo={userInfo} email={userInfo?.email} error={error} setError={setError} loading={loading} setLoading={setLoading} setUserInfo={setUserInfo} setVisible={setVisible}/>
+          <SendEmail 
+            userInfo={userInfo} 
+            email={userInfo?.email} 
+            error={error} 
+            setError={setError} 
+            loading={loading} 
+            setLoading={setLoading} 
+            setUserInfo={setUserInfo} 
+            setVisible={setVisible}/>
         )}
         {visible === 2 && (
-          <CodeVerification code={code} setCode={setCode} error={error}/>
+          <CodeVerification 
+            code={code} 
+            setCode={setCode} 
+            userInfo={userInfo} 
+            error={error} 
+            setError={setError} 
+            loading={loading} 
+            setLoading={setLoading} 
+            setVisible={setVisible}/>
         )}
         {visible === 3 && (
-          <ChangePassword password={password} setPassword={setPassword} conf_password={conf_password} setConf_password={setConf_password} error={error}/>
+          <ChangePassword 
+            password={password} 
+            setPassword={setPassword} 
+            conf_password={conf_password} 
+            setConf_password={setConf_password} 
+            error={error}/>
         )}
 
       </div>

@@ -32,7 +32,7 @@ export default function SearchAccount({ email, setEmail, error, setError, setLoa
             setUserInfo(data)
             setVisible(1)
             setError('')
-
+            setLoading(false)
 
         } catch (error) {
             setLoading(false)

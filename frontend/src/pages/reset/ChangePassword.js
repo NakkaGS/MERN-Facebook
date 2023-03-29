@@ -11,6 +11,7 @@ import * as Yup from "yup"
 import LoginInput from "../../components/input/loginInput"
 
 export default function ChangePassword({ password, setPassword, conf_password, setConf_password, error}) {
+    
     const validatePassword = Yup.object({
         password: Yup.string()
         .required("Enter a combination of at least six numbers, letters and ponctuation marks (such as ! and &)")
