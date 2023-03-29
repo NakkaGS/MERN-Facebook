@@ -6,6 +6,7 @@ const { validateEmail, validateLength, validateUsername } = require("../helpers/
 
 //Model
 const User = require("../models/User");
+const Code = require("../models/Code");
 
 //JSON Web Token
 const jwt = require("jsonwebtoken")
@@ -228,7 +229,7 @@ exports.sendResetPasswordCode = async(req, res) => {
         const savedCode = await new Code({
             code,
             user: user._id,
-        })
+        }).save()
         sendResetCode(user.email, user.first_name, code)
 
         return res.status(200).json({
