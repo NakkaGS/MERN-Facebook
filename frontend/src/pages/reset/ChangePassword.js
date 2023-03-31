@@ -7,9 +7,11 @@ import { Form, Formik } from "formik";
 //Yup
 import * as Yup from "yup";
 
+//Axios
+import axios from "axios";
+
 // Components
 import LoginInput from "../../components/input/loginInput";
-import { changePassword } from "../../../../backend/controllers/user";
 
 export default function ChangePassword({
   password,

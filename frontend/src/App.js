@@ -1,6 +1,9 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 
+//Components
+import CreatePostPopup from "./components/createPostPopup"
+
 //Pages
 import Login from './pages/login'
 import Profile from './pages/profile'
@@ -12,6 +15,8 @@ import Reset from './pages/reset';
 
 function App() {
   return <div>
+    <CreatePostPopup/>
+
     <Routes>
 
       <Route element={<LoggedInRoutes/>}>

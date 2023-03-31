@@ -10,6 +10,7 @@ const {
   findUser,
   sendResetPasswordCode,
   changePassword,
+  validateResetCode,
 } = require("../controllers/user");
 
 //Middlewares

@@ -10,6 +10,9 @@ import * as Yup from "yup"
 // Components
 import LoginInput from "../../components/input/loginInput"
 
+//Axios
+import axios from "axios";
+
 export default function CodeVerification({ 
     code, 
     setCode, 
