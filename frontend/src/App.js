@@ -1,4 +1,9 @@
 import './App.css';
+
+//Redux
+import { useSelector } from 'react-redux';
+
+//Router-Dom
 import { Routes, Route } from 'react-router-dom'
 
 //Components
@@ -13,9 +18,13 @@ import LoggedInRoutes from './routes/LoggedInRoutes';
 import NotLoggedInRoutes from './routes/NotLoggedInRoutes';
 import Reset from './pages/reset';
 
+
 function App() {
+
+  const { user } = useSelector((state) => ({ ...state }))
+  
   return <div>
-    <CreatePostPopup/>
+    <CreatePostPopup user={user}/>
 
     <Routes>
 
