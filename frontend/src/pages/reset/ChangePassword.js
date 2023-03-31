@@ -40,6 +40,7 @@ export default function ChangePassword({
 
   const navigate = useNavigate;
   
+  //Http request - POST
   const changePassword = async() => {
     try {
         setLoading(true)

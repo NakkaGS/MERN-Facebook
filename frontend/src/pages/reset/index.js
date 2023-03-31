@@ -20,13 +20,17 @@ import Footer from "../../components/login/Footer";
 import ChangePassword from "./ChangePassword";
 
 export default function Reset() {
+
+  //Gets the actual user
   const { user } = useSelector((state) => ({ ...state }));
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [visible, setVisible] = useState(0);
   const [email, setEmail] = useState("");
+
+  const [visible, setVisible] = useState(0);
+  
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -91,7 +95,6 @@ export default function Reset() {
             setError={setError}
             loading={loading}
             setLoading={setLoading}
-            setUserInfo={setUserInfo}
             setVisible={setVisible}
           />
         )}

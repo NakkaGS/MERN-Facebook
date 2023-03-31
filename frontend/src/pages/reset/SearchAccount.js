@@ -30,6 +30,7 @@ export default function SearchAccount({
       .max(50, "Email address can't be more than 50 characters"),
   });
 
+  //Http request - POST
   const handleSearch = async () => {
     try {
       setLoading(true);
@@ -50,11 +51,14 @@ export default function SearchAccount({
 
   return (
     <div className="reset_form">
+      
       <div className="reset_form_header">Find Your Account</div>
+
       <div className="reset_form_text">
         Please enter your email address or mobile number to search for your
         account.
       </div>
+
       <Formik
         enableReinitialize
         initialValues={{
@@ -64,6 +68,7 @@ export default function SearchAccount({
         onSubmit={() => {
           handleSearch();
         }}>
+
         {(formik) => (
           <Form>
             <LoginInput
@@ -72,7 +77,8 @@ export default function SearchAccount({
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address or phone number"
             />
-            {error && <div className="error_text">{error}</div>}
+
+            {error && <div className="error_text">{error}</div>}4
             <div className="reset_form_btns">
               <Link to="/login" className="gray_btn">
                 Cancel
@@ -83,7 +89,9 @@ export default function SearchAccount({
             </div>
           </Form>
         )}
+
       </Formik>
+
     </div>
   );
 }
