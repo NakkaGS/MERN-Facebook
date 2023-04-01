@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 //Styling
 import "./style.css";
 
+//Emoji Picker
+import EmojiPicker from "emoji-picker-react";
+
 export default function CreatePostPopup({ user }) {
   const [text, setText] = useState("");
-  const [showPrev, setShowPrev] = useState("")
+  const [showPrev, setShowPrev] = useState("");
+  const [picker, setPicker] = useState(true);
+
+  const textRef = useRef(null)
+
+  const handleEmoji = (emojiObject) => {
+    const ref = textRef.current;
+    ref.focus();
+    const start = text.substring(0, ref.selectionStart);
+    const end = text.substring(ref.selectionStart);
+    const newText = start + emojiObject.emoji + end;
+    setText(newText);
+  };
 
   return (
     <div className="blur">
@@ -32,6 +47,7 @@ export default function CreatePostPopup({ user }) {
         </div>
 
         <textarea
+        ref={textRef}
           maxLength="100"
           value={text}
           placeholder={`What's on your mind, ${user?.first_name}`}
@@ -50,7 +66,13 @@ export default function CreatePostPopup({ user }) {
         )}
 
         <div className="post_emojis_wrap">
-          <div className="comment_emoji_picker rlmove"></div>
+          {picker && (
+            <div className="comment_emoji_picker rlmove">
+              <EmojiPicker onEmojiClick={handleEmoji}/>
+            </div>
+          )}
+          <img src="../../../icons/colorful.png" alt="" />
+          <i className="emoji_icon_large" onClick={() => setPicker((prev) => !prev)}></i>
         </div>
       </div>
     </div>
