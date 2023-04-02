@@ -3,24 +3,14 @@ import { useEffect, useRef, useState } from "react";
 //Styling
 import "./style.css";
 
-//Emoji Picker
-import EmojiPicker from "emoji-picker-react";
+//Components
+import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
+import AddToYourPost from "./AddToYourPost";
 
 export default function CreatePostPopup({ user }) {
   const [text, setText] = useState("");
-  const [showPrev, setShowPrev] = useState("");
-  const [picker, setPicker] = useState(true);
-
-  const textRef = useRef(null)
-
-  const handleEmoji = (emojiObject) => {
-    const ref = textRef.current;
-    ref.focus();
-    const start = text.substring(0, ref.selectionStart);
-    const end = text.substring(ref.selectionStart);
-    const newText = start + emojiObject.emoji + end;
-    setText(newText);
-  };
+  const [showPrev, setShowPrev] = useState(false);
+  const textRef = useRef(null);
 
   return (
     <div className="blur">
@@ -31,7 +21,6 @@ export default function CreatePostPopup({ user }) {
           </div>
           <span>Create Post</span>
         </div>
-
         <div className="box_profile">
           <img src={user?.picture} alt="" className="box_profile_img" />
           <div className="box_col">
@@ -46,34 +35,28 @@ export default function CreatePostPopup({ user }) {
           </div>
         </div>
 
-        <textarea
-        ref={textRef}
-          maxLength="100"
-          value={text}
-          placeholder={`What's on your mind, ${user?.first_name}`}
-          onChange={(e) => setText(e.target.value)}
-          className="post_input"></textarea>
-
-        {showPrev && (
-          <div className="flex_center">
-            <textarea
-              maxLength="100"
-              value={text}
-              placeholder={`What's on your mind, ${user?.first_name}`}
-              onChange={(e) => setText(e.target.value)}
-              className="post_input"></textarea>
-          </div>
+        {!showPrev && (
+          <>
+            <div className="flex_center">
+              <textarea
+                ref={textRef}
+                maxLength="100"
+                value={text}
+                placeholder={`What's on your mind, ${user?.first_name}`}
+                className="post_input"
+                onChange={(e) => setText(e.target.value)}
+              ></textarea>
+            </div>
+            <EmojiPickerBackgrounds
+              text={text}
+              textRef={textRef}
+              setText={setText}
+            />
+          </>
         )}
 
-        <div className="post_emojis_wrap">
-          {picker && (
-            <div className="comment_emoji_picker rlmove">
-              <EmojiPicker onEmojiClick={handleEmoji}/>
-            </div>
-          )}
-          <img src="../../../icons/colorful.png" alt="" />
-          <i className="emoji_icon_large" onClick={() => setPicker((prev) => !prev)}></i>
-        </div>
+        <AddToYourPost/>
+        <button className="post_submit">Post</button>
       </div>
     </div>
   );
