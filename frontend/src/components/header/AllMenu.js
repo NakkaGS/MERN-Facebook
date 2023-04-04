@@ -1,7 +1,7 @@
 import React from 'react'
 
 //Data
-import{menu, create} from '../../data/allMenu'
+import{ menu, create } from '../../data/allMenu'
 
 //Component
 import AllMenuItem from './AllMenuItem'
