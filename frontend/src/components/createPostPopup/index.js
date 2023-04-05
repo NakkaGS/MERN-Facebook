@@ -8,11 +8,15 @@ import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
 import AddToYourPost from "./AddToYourPost";
 import ImagePreview from "./ImagePreview";
 
-
-export default function CreatePostPopup({ user }) {
+export default function CreatePostPopup({
+  text,
+  user,
+  setText,
+  images,
+  setImages,
+}) {
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(true);
-
 
   return (
     <div className="blur">
@@ -39,17 +43,20 @@ export default function CreatePostPopup({ user }) {
 
         {!showPrev ? (
           <>
-            <EmojiPickerBackgrounds
-              text={text}
-              user={user}
-              setText={setText}
-            />
+            <EmojiPickerBackgrounds text={text} user={user} setText={setText} />
           </>
         ) : (
-          <ImagePreview/>
+          <ImagePreview
+            text={text}
+            user={user}
+            setText={setText}
+            showPrev={showPrev}
+            images={images}
+            setImages={setImages}
+          />
         )}
 
-        <AddToYourPost/>
+        <AddToYourPost />
         <button className="post_submit">Post</button>
       </div>
     </div>
