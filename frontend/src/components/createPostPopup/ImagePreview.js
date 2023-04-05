@@ -1,9 +1,25 @@
 import { useRef } from "react";
 import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
 
-export default function ImagePreview({ text, user, setText }) {
+export default function ImagePreview({
+  text,
+  user,
+  setText,
+  images,
+  setImages,
+}) {
   const ImageInputRef = useRef(null);
-  const handleImages = () => {};
+  const handleImages = (e) => {
+    let files = Array.from(e.target.files);
+    //console.log(files);
+    files.forEach((img) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(img)
+      reader.onload = (readerEvent) => {
+        setImages((images) => [...images, readerEvent.target.result])
+      }
+    })
+  };
 
   return (
     <div className="overflow_a">
@@ -16,10 +32,35 @@ export default function ImagePreview({ text, user, setText }) {
           ref={ImageInputRef}
           onChange={handleImages}
         />
+
+        {images && images.length ? (
+          " "
+        ) : (
+          <div className="add_pics_inside1">
+            <div className="small_white_circle">
+              <i className="exit_icon"></i>
+            </div>
+            <div
+              className="add_col"
+              onClick={() => {
+                ImageInputRef.current.click();
+              }}>
+              <div className="add_circle">
+                <i className="addPhoto_icon"></i>
+              </div>
+              <span>Add Photos/Videos</span>
+              <span>or drag and grop</span>
+            </div>
+          </div>
+        )}
+        <div className="add_pics_inside2">
+          <div className="add_circle">
+            <i className="phone_icon"></i>
+          </div>
+          <div className="mobile_text">Add photos from your mobile device</div>
+          <span className="addphone_btn">Add</span>
+        </div>
       </div>
-      {
-        images && images.length ? "": ""
-      }
     </div>
   );
 }

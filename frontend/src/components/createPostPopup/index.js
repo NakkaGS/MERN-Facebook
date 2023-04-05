@@ -4,19 +4,16 @@ import { useState } from "react";
 import "./style.css";
 
 //Components
-import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
 import AddToYourPost from "./AddToYourPost";
+import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
 import ImagePreview from "./ImagePreview";
 
 export default function CreatePostPopup({
-  text,
   user,
-  setText,
-  images,
-  setImages,
 }) {
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(true);
+  const [images, setImages] = useState([]);
 
   return (
     <div className="blur">
