@@ -8,9 +8,7 @@ import AddToYourPost from "./AddToYourPost";
 import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
 import ImagePreview from "./ImagePreview";
 
-export default function CreatePostPopup({
-  user,
-}) {
+export default function CreatePostPopup({ user }) {
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(true);
   const [images, setImages] = useState([]);
@@ -50,10 +48,11 @@ export default function CreatePostPopup({
             showPrev={showPrev}
             images={images}
             setImages={setImages}
+            setShowPrev={setShowPrev}
           />
         )}
 
-        <AddToYourPost />
+        <AddToYourPost setShowPrev={setShowPrev} />
         <button className="post_submit">Post</button>
       </div>
     </div>
