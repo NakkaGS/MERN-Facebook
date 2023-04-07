@@ -1,13 +1,16 @@
 const express = require("express");
 
 //Controller
-const { createPost } = require("../controllers/post");
+const { uploadImages } = require("../controllers/upload");
 
 //Middlewares
+const imageUpload = require("../middlewares/imageUpload");
 const { authUser } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.post("/createPost", authUser, createPost);
+router.post("/uploadImages", imageUpload, uploadImages);
 
 module.exports = router;
+
+
