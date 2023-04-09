@@ -1,7 +1,19 @@
 # MERN-Facebook
  
 ##### MERN Project that recreates Facebook
-Frontend (React+Redux+Router+Axios+Yup+Formik) / Backend (Node.JS + Express + MongoDB)
+
+Frontend 
+- React
+- Redux
+- Router
+- Axios
+- Yup (Authentication)
+- Formik (Form)
+
+Backend 
+- Node.JS
+- Express (Express File)
+- MongoDB)
 
 ##### Project from Mohamed Hajji - [Udemy Page](https://www.udemy.com/course/build-facebook-clone-and-master-react-js-mern-stack-2022)
 
