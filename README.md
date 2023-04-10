@@ -13,7 +13,7 @@ Frontend
 Backend 
 - Node.JS
 - Express (Express File)
-- MongoDB)
+- MongoDB
 
 ##### Project from Mohamed Hajji - [Udemy Page](https://www.udemy.com/course/build-facebook-clone-and-master-react-js-mern-stack-2022)
 
