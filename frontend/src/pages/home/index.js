@@ -14,7 +14,7 @@ import Stories from '../../components/home/stories'
 import CreatePost from '../../components/createPost'
 import SendVerification from '../../components/home/sendVerification'
 
-export default function Home() {
+export default function Home({ setVisible }) {
   const { user } = useSelector((state) => ({...state}));
 
   return (
@@ -28,7 +28,7 @@ export default function Home() {
           user.verified && <SendVerification user={user}/>
         }
 
-        <CreatePost user={user}/>
+        <CreatePost user={user} setVisible={setVisible}/>
       </div>
       <RightHome user={user}/>
     </div>
