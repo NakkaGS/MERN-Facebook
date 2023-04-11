@@ -10,8 +10,9 @@ import ImagePreview from "./ImagePreview";
 
 export default function CreatePostPopup({ user }) {
   const [text, setText] = useState("");
-  const [showPrev, setShowPrev] = useState(true);
+  const [showPrev, setShowPrev] = useState(false);
   const [images, setImages] = useState([]);
+  const [background, setBackground] = useState("");
 
   return (
     <div className="blur">
@@ -38,7 +39,14 @@ export default function CreatePostPopup({ user }) {
 
         {!showPrev ? (
           <>
-            <EmojiPickerBackgrounds text={text} user={user} setText={setText} />
+            <EmojiPickerBackgrounds
+              text={text}
+              user={user}
+              setText={setText}
+              showPrev={showPrev}
+              setBackground={setBackground}
+              background={background}
+            />
           </>
         ) : (
           <ImagePreview
