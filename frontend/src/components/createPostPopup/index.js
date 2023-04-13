@@ -16,10 +16,12 @@ import { createPost } from "../../functions/post";
 
 //React Spinners
 import { PulseLoader } from 'react-spinners'
+import PostError from "./PostError";
 
 export default function CreatePostPopup({ user, setVisible }) {
   const [text, setText] = useState("");
   const [showPrev, setShowPrev] = useState(false);
+  const [error, setError] = useState("asdasdas");
   const [loading, setLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [background, setBackground] = useState("");
@@ -31,19 +33,35 @@ export default function CreatePostPopup({ user, setVisible }) {
   })
 
   const postSubmit = async () => {
-    if(background){
+    if (background) {
       setLoading(true);
-      const res = await createPost(null, background, text, null, user.id, user.token)
+      const response = await createPost(
+        null,
+        background,
+        text,
+        null,
+        user.id,
+        user.token
+      );
+      //console.log(res)
       setLoading(false);
-      setBackground("");
-      setText("")
-      setVisible(false)
+
+      if(response==="OK") {
+        setBackground("");
+        setText("");
+        setVisible(false);
+      } else {
+        setError(response)
+      }
     }
-  }
+  };
 
   return (
     <div className="blur">
       <div className="postBox" ref={popup}>
+        {
+          error && <PostError error={error} setError={setError}/>
+        }
         <div className="box_header">
           <div
             className="small_circle"
