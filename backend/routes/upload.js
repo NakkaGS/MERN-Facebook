@@ -9,7 +9,7 @@ const { authUser } = require("../middlewares/auth");
 
 const router = express.Router();
 
-router.post("/uploadImages", imageUpload, uploadImages);
+router.post("/uploadImages", authUser, imageUpload, uploadImages);
 
 module.exports = router;
 
