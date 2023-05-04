@@ -71,13 +71,27 @@ export default function CreatePostPopup({ user, setVisible }) {
 
       const response = await uploadImages(formData, path, user.token);
 
-      await createPost(null, null, text, response, user.id, user.token);
+      const res = await createPost(
+        null,
+        null,
+        text,
+        response,
+        user.id,
+        user.token
+      );
 
-      setLoading(false)
-      setText("")
-      setImages("")
-      setVisible(false)
+      setLoading(false);
+
+      if(res === "OK") {
+        setText("");
+        setImages("");
+        setVisible(false);
+      } else {
+        setError(res)
+      }
+
     } else if (text) {
+
       setLoading(true);
       const response = await createPost(
         null,
@@ -150,6 +164,7 @@ export default function CreatePostPopup({ user, setVisible }) {
             images={images}
             setImages={setImages}
             setShowPrev={setShowPrev}
+            setError={setError}
           />
         )}
 

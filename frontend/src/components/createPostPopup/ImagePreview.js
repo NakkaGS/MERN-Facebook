@@ -8,16 +8,34 @@ export default function ImagePreview({
   images,
   setImages,
   setShowPrev,
+  setError,
 }) {
   const ImageInputRef = useRef(null);
+
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
     //console.log(files);
     files.forEach((img) => {
+      if (
+        img.type !== "image/jpeg" &&
+        img.type !== "image/png" &&
+        img.type !== "image/webp" &&
+        img.type !== "image/gif"
+      ) {
+        setError(
+          `${img.name} format is unsupported ! Only jpeg, png, webp, gif are allowerd`
+        );
+        files = files.filter((item) => item.name !== img.name)
+        return;
+      } else if (img.size > 1024 * 1024 * 5) {
+        setError(`${img.name} size is too lart max 5mb allowed`);
+        files = files.filter((item) => item.name !== img.name)
+      }
       const reader = new FileReader();
       reader.readAsDataURL(img);
       reader.onload = (readerEvent) => {
         setImages((images) => [...images, readerEvent.target.result]);
+        
       };
     });
   };
@@ -28,6 +46,7 @@ export default function ImagePreview({
       <div className="add_pics_wrap">
         <input
           type="file"
+          accept="image/jpeg, image/png, image/webp , image/gif"
           multiple
           hidden
           ref={ImageInputRef}
@@ -76,9 +95,11 @@ export default function ImagePreview({
           </div>
         ) : (
           <div className="add_pics_inside1">
-            <div className="small_white_circle" onClick={() => {
-              setShowPrev(false)
-            }}>
+            <div
+              className="small_white_circle"
+              onClick={() => {
+                setShowPrev(false);
+              }}>
               <i className="exit_icon"></i>
             </div>
             <div
